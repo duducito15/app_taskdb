@@ -11,25 +11,25 @@ class DbAdmin {
   static final DbAdmin db = DbAdmin._();
   DbAdmin._();
 
-  checkDataBase() {
+  Future<Database?> checkDataBase() async {
     if (myDatabase != null) {
       return myDatabase;
     }
 
-    myDatabase = initDataBase(); // crear la base de datos
+    myDatabase = await initDataBase(); // crear la base de datos
     return myDatabase;
   }
 
-  initDataBase() async {
+  Future<Database> initDataBase() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, "TaskDB.db");
-    await openDatabase(
+    return await openDatabase(
       path,
       version: 1,
       onOpen: (db) {},
-      onCreate: (Database dbx, int version) {
+      onCreate: (Database dbx, int version) async {
         //Crear la tabla
-        dbx.execute(
+        await dbx.execute(
             "CREATE TABLE TASK(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, status TEXT)");
       },
     );
