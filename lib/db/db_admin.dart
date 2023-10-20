@@ -34,4 +34,25 @@ class DbAdmin {
       },
     );
   }
+
+  insertRawTask() async {
+    Database? db = await checkDataBase();
+    int res = await db!.rawInsert(
+      "INSERT INTO TASK(title, description, status) VALUES('Comprar','Ir al super a comprar','verdad')",
+    );
+    print(res);
+  }
+
+  insertTask() async {
+    Database? db = await checkDataBase();
+    int res = await db!.insert(
+      "TASK",
+      {
+        "title": "Vender",
+        "description": "Lo comprado en el super",
+        "status": "verdad",
+      },
+    );
+    print(res);
+  }
 }
