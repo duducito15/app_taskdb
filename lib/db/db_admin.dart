@@ -67,4 +67,25 @@ class DbAdmin {
     List tasks = await db!.query("TASK");
     print(tasks);
   }
+
+  updateRawTask() async {
+    Database? db = await checkDataBase();
+    int res = await db!.rawUpdate(
+      "UPDATE TASK SET title='Visitar', description='las ruinas de saylla',status ='falso' WHERE id = 6",
+    );
+    print(res);
+  }
+
+  updateTask() async {
+    Database? db = await checkDataBase();
+    db!.update(
+      "TASK",
+      {
+        "title": "Ir al cine",
+        "description": "para ver spiderman 2",
+        "status": "falso",
+      },
+      where: "id = 2",
+    );
+  }
 }
