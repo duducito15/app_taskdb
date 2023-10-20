@@ -78,7 +78,7 @@ class DbAdmin {
 
   updateTask() async {
     Database? db = await checkDataBase();
-    db!.update(
+    int res = await db!.update(
       "TASK",
       {
         "title": "Ir al cine",
@@ -87,5 +87,18 @@ class DbAdmin {
       },
       where: "id = 2",
     );
+    print(res);
+  }
+
+  deleteRawTask() async {
+    Database? db = await checkDataBase();
+    int res = await db!.rawDelete("DELETE FROM TASK WHERE id = 6");
+    print(res);
+  }
+
+  deleteTask() async {
+    Database? db = await checkDataBase();
+    int res = await db!.delete("TASK", where: "id = 5");
+    print(res);
   }
 }
