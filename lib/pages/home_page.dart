@@ -26,6 +26,12 @@ class HomePage extends StatelessWidget {
               },
               child: Text("Insertar Data"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                DbAdmin.db.getTask();
+              },
+              child: Text("Mostrar Data"),
+            ),
           ],
         ),
       ),

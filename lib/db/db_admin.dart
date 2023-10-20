@@ -55,4 +55,16 @@ class DbAdmin {
     );
     print(res);
   }
+
+  getRawTask() async {
+    Database? db = await checkDataBase();
+    List tasks = await db!.rawQuery("SELECT * FROM TASK");
+    print(tasks);
+  }
+
+  getTask() async {
+    Database? db = await checkDataBase();
+    List tasks = await db!.query("TASK");
+    print(tasks);
+  }
 }
